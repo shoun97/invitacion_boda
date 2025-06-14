@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Heart, Calendar, MapPin, Video, Clock } from 'lucide-react';
+import { Heart, Calendar, MapPin, Video, Clock, Users, Send } from 'lucide-react';
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({
@@ -10,6 +10,15 @@ export default function Home() {
     minutes: 0,
     seconds: 0,
   });
+
+  const [formData, setFormData] = useState({
+    name: '',
+    title: '',
+    attending: '',
+    message: ''
+  });
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     const weddingDate = new Date('2025-09-14T19:00:00-03:00').getTime();
@@ -33,6 +42,32 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically send the data to your backend
+    console.log('RSVP Data:', formData);
+    setIsSubmitted(true);
+
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({
+        name: '',
+        title: '',
+        attending: '',
+        message: ''
+      });
+    }, 3000);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-pink-50 to-rose-50">
       {/* Floating Hearts Animation */}
@@ -49,7 +84,7 @@ export default function Home() {
           <p className="font-dancing text-2xl md:text-3xl text-rose-600 mb-4 animate-pulse-slow">
             Te invitamos a celebrar
           </p>
-          <div 
+          <div
             style={{
               height: "200px",
               padding: "20px"
@@ -160,11 +195,117 @@ export default function Home() {
           </div>
         </div>
 
+        {/* RSVP Form Section */}
+        <div className="glass-card rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl mb-16">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center mb-6">
+              <Users className="text-rose-500 w-12 h-12" />
+            </div>
+            <h3 className="font-dancing text-4xl text-rose-800 mb-4">
+              Confirma tu Asistencia
+            </h3>
+            <p className="text-lg text-rose-600 mb-8">
+              Nos encantaría saber si podrás acompañarnos virtualmente en este día tan especial
+            </p>
+          </div>
+
+          {!isSubmitted ? (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-rose-700 mb-2">
+                    Nombre Completo *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-400 focus:ring-2 focus:ring-rose-200 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                    placeholder="Tu nombre completo"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="title" className="block text-sm font-medium text-rose-700 mb-2">
+                    Título/Relación
+                  </label>
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-400 focus:ring-2 focus:ring-rose-200 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                    placeholder="Ej: Amigo, Familiar, Compañero..."
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="attending" className="block text-sm font-medium text-rose-700 mb-2">
+                  ¿Podrás acompañarnos virtualmente? *
+                </label>
+                <select
+                  id="attending"
+                  name="attending"
+                  required
+                  value={formData.attending}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-400 focus:ring-2 focus:ring-rose-200 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="si">¡Sí, estaré presente virtualmente!</option>
+                  <option value="no">No podré acompañarlos</option>
+                  <option value="tal-vez">Tal vez pueda conectarme</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-rose-700 mb-2">
+                  Mensaje para los novios
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-400 focus:ring-2 focus:ring-rose-200 transition-all duration-300 bg-white/80 backdrop-blur-sm resize-none"
+                  placeholder="Comparte tus buenos deseos para Igmar y Manuel..."
+                ></textarea>
+              </div>
+
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 transform"
+                >
+                  <Send className="w-5 h-5" />
+                  Confirmar Asistencia
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="text-center py-8">
+              <Heart className="text-rose-400 w-16 h-16 mx-auto mb-6 animate-pulse" />
+              <h4 className="font-dancing text-3xl text-rose-800 mb-4">
+                ¡Gracias por confirmar!
+              </h4>
+              <p className="text-lg text-rose-600">
+                Tu confirmación ha sido recibida. ¡Nos vemos el día de la boda!
+              </p>
+            </div>
+          )}
+        </div>
+
         <div className="glass-card rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl text-center mb-20">
           <Heart className="text-rose-400 w-16 h-16 mx-auto mb-6 animate-pulse" />
           <p className="text-lg text-rose-600 leading-relaxed mb-6">
             Dios no separa a dos personas que tienen la misma intención pero siempre prueba qué tan fuerte son sus intenciones de permanecer juntas,
-             porque no es el destino lo que une sino la voluntad de caminar en la misma dirección... La dirección de Dios.
+            porque no es el destino lo que une sino la voluntad de caminar en la misma dirección... La dirección de Dios.
           </p>
 
           <div className="flex justify-center items-center gap-4 mt-8">
@@ -173,7 +314,7 @@ export default function Home() {
             <Heart className="text-rose-400 w-8 h-8" />
             <Heart className="text-rose-400 w-8 h-8" />
             <Heart className="text-rose-400 w-8 h-8" />
- 
+
           </div>
         </div>
 
@@ -202,6 +343,8 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+
 
         {/* Footer */}
         <div className="text-center mt-16 pb-8">
