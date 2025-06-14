@@ -161,7 +161,6 @@ export default function RSVPForm({ codigo, name, title, yaConfirmado, mensaje, a
                             type="tel"
                             id="telefono"
                             name="telefono"
-                            required
                             pattern="[0-9+ ]{6,20}"
                             value={formData.telefono}
                             onChange={handleInputChange}
@@ -184,7 +183,7 @@ export default function RSVPForm({ codigo, name, title, yaConfirmado, mensaje, a
                         className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-400 focus:ring-2 focus:ring-rose-200 transition-all duration-300 bg-white/80 backdrop-blur-sm"
                     >
                         <option value="">Selecciona una opción</option>
-                        <option value="si">¡Sí, estaré presente virtualmente!</option>
+                        <option value="si">¡Sí!</option>
                         <option value="no">No podré acompañarlos</option>
                         <option value="tal-vez">Tal vez pueda conectarme</option>
                     </select>
