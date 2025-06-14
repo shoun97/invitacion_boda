@@ -12,7 +12,6 @@ export default function Home() {
   });
 
   useEffect(() => {
-    // Wedding date: September 14, 2025 at 19:00 Chile time (GMT-3)
     const weddingDate = new Date('2025-09-14T19:00:00-03:00').getTime();
 
     const timer = setInterval(() => {
@@ -141,7 +140,7 @@ export default function Home() {
               Transmisión en Vivo
             </h3>
             <p className="text-lg text-rose-600 mb-8 leading-relaxed">
-              No podrás estar físicamente con nosotros, pero podrás ser parte de este momento especial 
+              No podrás estar físicamente con nosotros, pero podrás ser parte de este momento especial
               a través de nuestra transmisión en vivo. ¡Acompáñanos virtualmente en este día tan importante!
             </p>
             <a
@@ -156,6 +155,24 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="glass-card rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl text-center mb-20">
+          <Heart className="text-rose-400 w-16 h-16 mx-auto mb-6 animate-pulse" />
+          <p className="text-lg text-rose-600 leading-relaxed mb-6">
+            Dios no separa a dos personas que tienen la misma intención pero siempre prueba qué tan fuerte son sus intenciones de permanecer juntas,
+             porque no es el destino lo que une sino la voluntad de caminar en la misma dirección... La dirección de Dios.
+          </p>
+
+          <div className="flex justify-center items-center gap-4 mt-8">
+
+            <Heart className="text-rose-400 w-8 h-8" />
+            <Heart className="text-rose-400 w-8 h-8" />
+            <Heart className="text-rose-400 w-8 h-8" />
+            <Heart className="text-rose-400 w-8 h-8" />
+ 
+          </div>
+        </div>
+
+
         {/* Message Section */}
         <div className="glass-card rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl text-center">
           <Heart className="text-rose-400 w-16 h-16 mx-auto mb-6 animate-pulse" />
@@ -163,8 +180,8 @@ export default function Home() {
             Con Todo Nuestro Amor
           </h3>
           <p className="text-lg text-rose-600 leading-relaxed mb-6">
-            Después de tanto tiempo esperando este momento, finalmente llegó el día de unirnos 
-            en matrimonio. Aunque la distancia nos separe físicamente, sabemos que estarás 
+            Después de tanto tiempo esperando este momento, finalmente llegó el día de unirnos
+            en matrimonio. Aunque la distancia nos separe físicamente, sabemos que estarás
             presente en nuestros corazones en este día tan especial.
           </p>
           <p className="font-dancing text-2xl text-rose-700">
