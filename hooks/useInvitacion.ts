@@ -38,7 +38,7 @@ export function useInvitacion() {
       const { data, error } = await supabase
         .from('invitaciones')
         .select('nombre, apellido, titulo, asiste, descripcion')
-        .eq('codigo', codigo?.trim().toLowerCase() || '');
+        .eq('codigo', codigo?.trim() || '');
 
       if (error) {
         console.error(error);
