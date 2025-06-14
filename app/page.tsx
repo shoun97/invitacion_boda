@@ -49,9 +49,14 @@ export default function Home() {
           <p className="font-dancing text-2xl md:text-3xl text-rose-600 mb-4 animate-pulse-slow">
             Te invitamos a celebrar
           </p>
-          <h1 className="font-great-vibes text-6xl md:text-8xl lg:text-9xl text-gradient mb-8 leading-none">
+          <div 
+            style={{
+              height: "200px",
+              padding: "20px"
+            }}
+            className="font-great-vibes text-6xl md:text-8xl lg:text-9xl text-gradient mb-8 leading-none">
             Igmar & Manuel
-          </h1>
+          </div>
           <div className="flex items-center justify-center gap-4 mb-8">
             <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-rose-300"></div>
             <Heart className="text-rose-400 w-6 h-6 animate-pulse" />
