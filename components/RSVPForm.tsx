@@ -1,4 +1,3 @@
-// components/RSVPForm.tsx
 'use client';
 
 import { useState } from 'react';
@@ -14,18 +13,16 @@ interface RSVPFormProps {
     mensaje: string | null;
 }
 
-
-
 export default function RSVPForm({ codigo, name, title, yaConfirmado, mensaje, asiste }: RSVPFormProps) {
     const [formData, setFormData] = useState({
         name,
         title,
         attending: '',
-        message: ''
+        message: '',
+        telefono: ''
     });
 
     const [respuestaFinal, setRespuestaFinal] = useState('');
-
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -43,7 +40,8 @@ export default function RSVPForm({ codigo, name, title, yaConfirmado, mensaje, a
             .from('invitaciones')
             .update({
                 asiste: formData.attending,
-                descripcion: formData.message
+                descripcion: formData.message,
+                telefono: formData.telefono
             })
             .eq('codigo', codigo);
 
@@ -63,7 +61,6 @@ export default function RSVPForm({ codigo, name, title, yaConfirmado, mensaje, a
                 <p className="text-lg text-rose-600 mb-4">
                     Tu respuesta fue: <strong className="capitalize">{asiste}</strong>
                 </p>
-
                 {mensaje && (
                     <div className="text-rose-500 italic border-t border-rose-200 pt-4">
                         “{mensaje}”
@@ -96,8 +93,6 @@ export default function RSVPForm({ codigo, name, title, yaConfirmado, mensaje, a
     return (
         <div className="glass-card rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl mb-16">
             <div className="text-center mb-8">
-
-
                 <div className="flex items-center justify-center mb-6">
                     <Heart className="text-rose-500 w-12 h-12 animated-float" />
                 </div>
@@ -151,6 +146,23 @@ export default function RSVPForm({ codigo, name, title, yaConfirmado, mensaje, a
                             value={formData.title}
                             className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-400 focus:ring-2 focus:ring-rose-200 transition-all duration-300 bg-white/80 backdrop-blur-sm"
                             placeholder="Ej: Amigo, Familiar, Compañero..."
+                        />
+                    </div>
+
+                    <div className="md:col-span-2">
+                        <label htmlFor="telefono" className="block text-sm font-medium text-rose-700 mb-2">
+                            Número de Teléfono
+                        </label>
+                        <input
+                            type="tel"
+                            id="telefono"
+                            name="telefono"
+                            required
+                            pattern="[0-9+ ]{6,20}"
+                            value={formData.telefono}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-400 focus:ring-2 focus:ring-rose-200 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                            placeholder="Ej: +569 1234 5678"
                         />
                     </div>
                 </div>
