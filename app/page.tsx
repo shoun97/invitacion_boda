@@ -180,7 +180,7 @@ export default function Home() {
               Transmisión en Vivo
             </h3>
             <p className="text-lg text-rose-600 mb-8 leading-relaxed">
-              No podrás estar físicamente con nosotros, pero podrás ser parte de este momento especial
+              Si no puedes estar físicamente con nosotros, podrás ser parte de este momento especial
               a través de nuestra transmisión en vivo. ¡Acompáñanos virtualmente en este día tan importante!
             </p>
             <a
