@@ -39,17 +39,21 @@ export default function RSVPForm({ codigo, name, title, yaConfirmado, mensaje, a
         const { error } = await supabase
             .from('invitaciones')
             .update({
-                asiste: formData.attending,
-                descripcion: formData.message,
-                telefono: formData.telefono
+                asiste: formData.attending || '',
+                descripcion: formData.message || '',
+                telefono: formData.telefono || ''
             })
             .eq('codigo', codigo);
 
-        if (!error) {
-            setRespuestaFinal(formData.attending);
-            setIsSubmitted(true);
+        if (error) {
+            console.error('Error al guardar en Supabase:', error);
+            return;
         }
+
+        setRespuestaFinal(formData.attending);
+        setIsSubmitted(true);
     };
+
 
     if (yaConfirmado) {
         return (

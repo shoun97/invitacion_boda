@@ -15,7 +15,6 @@ export function useInvitacion() {
   const searchParams = useSearchParams();
   const codigo = searchParams.get('codigo');
 
-  console.log({ codigo })
 
   const [loading, setLoading] = useState(true);
   const [valido, setValido] = useState(false);
