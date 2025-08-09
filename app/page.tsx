@@ -137,14 +137,14 @@ export default function Home() {
               <div className="flex items-center justify-center gap-2">
                 <Clock className="text-rose-500 w-5 h-5" />
                 <p className="text-xl text-rose-600">
-                  7:00 PM (Hora de Venezuela)
+                  7:00 PM 
                 </p>
                 <img width="25px" src="/venezuela.png"/>
               </div>
               <div className="flex items-center justify-center gap-2">
                 <Clock className="text-rose-500 w-5 h-5" />
                 <p className="text-xl text-rose-600">
-                  6:00 PM (Hora de Colombia)
+                  6:00 PM 
                 </p>
                 <img width="25px" src="/colombia.png"/>
               </div>
