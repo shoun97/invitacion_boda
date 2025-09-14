@@ -19,7 +19,7 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const weddingDate = new Date('2025-09-14T19:00:00-05:00').getTime();
+    const weddingDate = new Date('2025-09-14T18:00:00-05:00').getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
